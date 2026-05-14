@@ -7,7 +7,7 @@ from models.stock_candidate import (
 )
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DOWNLOAD_DIR = f"{BASE_DIR}/engine/data/downloads"
+DOWNLOAD_DIR = BASE_DIR / "engine" / "data" / "downloads"
 
 STATE_FILE = Path(
     "engine/data/state/rotation_state.json"
