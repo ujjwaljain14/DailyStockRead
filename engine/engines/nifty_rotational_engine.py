@@ -13,6 +13,9 @@ STATE_FILE = Path(
     "engine/data/state/rotation_state.json"
 )
 
+DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
+STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+
 
 INDEX_URLS = {
     "smallcap100":
