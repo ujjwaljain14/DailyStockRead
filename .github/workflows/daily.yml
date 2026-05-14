@@ -1,0 +1,36 @@
+name: Daily PDF Mail
+
+on:
+  schedule:
+    - cron: '30 14 * * *' # 8 PM IST
+
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+    
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+    
+      - name: Install Python packages
+        run: |
+          pip install -r requirements.txt
+    
+      - name: Install Playwright Browsers
+        run: |
+          playwright install --with-deps chromium
+    
+      - name: Run Script
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          python main.py
