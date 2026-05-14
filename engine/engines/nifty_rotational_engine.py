@@ -73,6 +73,10 @@ def download_index_csv(
 
     response.raise_for_status()
 
+    print("file_path:", file_path)
+    print("parent exists:", file_path.parent.exists())
+    print("cwd:", Path.cwd())
+
     with open(file_path, "wb") as f:
         f.write(response.content)
 
