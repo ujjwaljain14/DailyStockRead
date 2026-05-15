@@ -2,7 +2,7 @@ name: Daily PDF Mail
 
 on:
   schedule:
-    - cron: '30 14 * * *' # 8 PM IST
+    - cron: '44 15 * * *' # 9:14 PM IST
 
   workflow_dispatch:
 
