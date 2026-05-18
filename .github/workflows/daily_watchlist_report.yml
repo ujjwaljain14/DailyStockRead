@@ -41,6 +41,7 @@ jobs:
       - name: Process Email Commands
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_IMAP_SERVER: imap.gmail.com
         run: |
