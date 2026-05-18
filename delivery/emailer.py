@@ -6,6 +6,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from automation.thread_manager import (
+    add_message_id
+)
+
 
 load_dotenv()
 
@@ -20,7 +24,9 @@ REPORT_PATH = Path(
 )
 
 
-def send_email():
+def send_email(
+    subject: str
+):
 
     if not REPORT_PATH.exists():
 
@@ -30,9 +36,7 @@ def send_email():
 
     msg = EmailMessage()
 
-    msg["Subject"] = (
-        "Daily StockCharts Report"
-    )
+    msg["Subject"] = subject
 
     msg["From"] = EMAIL_USER
 
@@ -53,6 +57,10 @@ def send_email():
             filename=REPORT_PATH.name
         )
 
+    msg_id = msg.make_msgid()
+
+    msg["Message-ID"] = msg_id
+
     with smtplib.SMTP_SSL(
         "smtp.gmail.com",
         465
@@ -64,5 +72,12 @@ def send_email():
         )
 
         smtp.send_message(msg)
+
+    add_message_id(msg_id)
+
+    print(
+        f"Tracked Message-ID: "
+        f"{msg_id}"
+    )
 
     print("Email sent successfully")
