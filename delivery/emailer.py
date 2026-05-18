@@ -10,6 +10,7 @@ from automation.thread_manager import (
     add_message_id
 )
 
+from email.utils import make_msgid
 
 load_dotenv()
 
@@ -57,7 +58,7 @@ def send_email(
             filename=REPORT_PATH.name
         )
 
-    msg_id = msg.make_msgid()
+    msg_id = make_msgid()
 
     msg["Message-ID"] = msg_id
 
