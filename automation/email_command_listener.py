@@ -105,6 +105,7 @@ def process_unread_emails():
 
     mail.select("inbox")
     print(EMAIL_TO)
+    print(EMAIL_USER)
     status, messages = mail.search(None, 'TO', EMAIL_TO, 'UNSEEN')
 
     email_ids = (
