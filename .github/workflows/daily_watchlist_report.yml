@@ -1,0 +1,40 @@
+name: Daily Watchlist Report
+
+on:
+
+  schedule:
+    - cron: "0 13 * * *"
+
+  workflow_dispatch:
+
+jobs:
+
+  watchlist-report:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Install Playwright
+        run: |
+          playwright install chromium
+
+      - name: Run Watchlist Pipeline
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          python watchlist_main.py
