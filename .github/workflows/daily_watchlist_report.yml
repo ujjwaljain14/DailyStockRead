@@ -3,7 +3,7 @@ name: Daily Watchlist Report
 on:
 
   schedule:
-    - cron: "0 13 * * *"
+    - cron: '51 15 * * *' # 9:20 PM IST
 
   workflow_dispatch:
 
