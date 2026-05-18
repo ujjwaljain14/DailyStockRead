@@ -113,7 +113,11 @@ def run_chart_pipeline():
 
     print("\nSending email...")
 
-    send_email()
+    send_email(
+        subject=(
+            "Daily Rotational Report"
+        )
+    )
 
     clear_old_screenshots()
     clear_old_reports()
