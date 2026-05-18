@@ -44,6 +44,7 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_IMAP_SERVER: imap.gmail.com
+          PYTHONUNBUFFERED: "1"
         run: |
           python -m automation.email_command_listener
 
