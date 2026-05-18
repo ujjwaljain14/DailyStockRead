@@ -20,7 +20,6 @@ from automation.command_parser import (
 from automation.command_executor import (
     execute_commands
 )
-from delivery.emailer import EMAIL_TO
 
 
 load_dotenv()
@@ -28,6 +27,10 @@ load_dotenv()
 
 EMAIL_USER = os.getenv(
     "EMAIL_USER"
+)
+
+EMAIL_TO = os.getenv(
+    "EMAIL_TO"
 )
 
 EMAIL_PASS = os.getenv(
