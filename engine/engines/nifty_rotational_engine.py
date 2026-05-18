@@ -29,7 +29,7 @@ INDEX_URLS = {
 }
 
 
-BATCH_SIZE = 1
+BATCH_SIZE = 10
 
 
 def load_state():
