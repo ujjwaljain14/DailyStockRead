@@ -13,6 +13,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
 
       - name: Checkout Repository
@@ -30,6 +33,47 @@ jobs:
       - name: Install Playwright
         run: |
           playwright install chromium
+
+      ##################################################
+      # PROCESS EMAIL COMMANDS
+      ##################################################
+
+      - name: Process Email Commands
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_IMAP_SERVER: imap.gmail.com
+        run: |
+          python -m automation.email_command_listener
+
+      ##################################################
+      # COMMIT WATCHLIST CHANGES
+      ##################################################
+
+      - name: Commit Updated Watchlist
+        run: |
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add watchlists/subscribed_stocks.json
+          git add automation/tracked_threads.json
+
+          git diff --cached --quiet || git commit -m "Update watchlist"
+
+          git push
+
+      ##################################################
+      # ENSURE LATEST STATE
+      ##################################################
+
+      - name: Pull Latest Changes
+        run: |
+          git pull
+
+      ##################################################
+      # GENERATE REPORT
+      ##################################################
 
       - name: Run Watchlist Pipeline
         env:
