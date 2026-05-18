@@ -1,3 +1,4 @@
+from datetime import datetime
 import imaplib
 import email
 
@@ -19,6 +20,7 @@ from automation.command_parser import (
 from automation.command_executor import (
     execute_commands
 )
+from delivery.emailer import EMAIL_TO
 
 
 load_dotenv()
@@ -100,10 +102,7 @@ def process_unread_emails():
 
     mail.select("inbox")
 
-    status, messages = mail.search(
-        None,
-        f'(UNSEEN FROM "{EMAIL_USER}")'
-    )
+    status, messages = mail.search(None, 'TO', EMAIL_TO, 'UNSEEN')
 
     email_ids = (
         messages[0]
