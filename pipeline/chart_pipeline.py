@@ -16,7 +16,8 @@ from delivery.emailer import send_email
 
 from charts.chart_setup import (
     configure_chart,
-    set_period
+    set_period,
+    reset_chart_view
 )
 
 from charts.stock_actions import (
@@ -52,6 +53,7 @@ def process_stock(page, symbol: str):
     for period in ["Daily", "Weekly"]:
 
         set_period(page, period)
+        reset_chart_view(page)
 
         capture_screenshot(
             page,
