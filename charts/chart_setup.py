@@ -224,6 +224,21 @@ def set_period(page: Page, period: str):
     except Exception as e:
 
         print(f"Could not set period {period}: {e}")
+
+def reset_chart_view(page: Page):
+
+    try:
+        page.locator("#home-button").click()
+
+        page.wait_for_timeout(1500)
+
+        print("Chart view reset")
+
+    except Exception as e:
+
+        print(
+            f"Could not reset chart view: {e}"
+        )
         
 def set_best_range(page: Page):
 
